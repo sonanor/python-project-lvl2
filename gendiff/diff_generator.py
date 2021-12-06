@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 
-import json
+from .arg_parser import parser
 
 
 def generate_diff(first, second):
-    # open files
-    first = json.load(open(first, 'r'))
-    second = json.load(open(second, 'r'))
+    first = parser(first)
+    second = parser(second)
 
     # getting and formatting difference
     first_set = set(first.items())
