@@ -1,29 +1,28 @@
-SYMBOLS = {
-    'added': '+ ',
-    'removed': '- ',
-    'unchanged': ' ',
-    'nested': ' {\n '
-}
+from gendiff.diff_builder import ChangeStatus, Node
 
 
-def stylish_result(diff_inner_repr, depth=0):
+def stylish_result(diff_nodes: list[Node], depth=0):
     result = '{\n'
     indent = '  '
-    for _ in range(depth):
-        indent += '    '
-    for item in diff_inner_repr:
-        if item['status'] == 'nested':
-            data = stylish_result(item['children'], depth + 1)
-            result += f"{indent}  {item['name']}: {data}\n"
-        elif item['status'] == 'changed':
-            result += f"{indent}- {item['name']}: {format_value(item['old_value'], indent)}\n"
-            result += f"{indent}+ {item['name']}: {format_value(item['new_value'], indent)}\n"
-        elif item['status'] == 'added':
-            result += f"{indent}+ {item['name']}: {format_value(item['value'], indent)}\n"
-        elif item['status'] == 'removed':
-            result += f"{indent}- {item['name']}: {format_value(item['value'], indent)}\n"
-        elif item['status'] == 'unchanged':
-            result += f"{indent}  {item['name']}: {format_value(item['value'], indent)}\n"
+    indent += '    ' * depth
+    symbols = {
+        ChangeStatus.Added: '+',
+        ChangeStatus.Removed: '-',
+        ChangeStatus.Unchanged: ' '
+    }
+    for item in diff_nodes:
+        if item.status == ChangeStatus.Nested:
+            value = stylish_result(item.children, depth + 1)
+            result += f"{indent}  {item.name}: {value}\n"
+        elif item.status == ChangeStatus.Changed:
+            old_value = format_value(item.old_value, indent)
+            new_value = format_value(item.new_value, indent)
+            result += f"{indent}{symbols[ChangeStatus.Removed]} {item.name}: {old_value}\n"
+            result += f"{indent}{symbols[ChangeStatus.Added]} {item.name}: {new_value}\n"
+        else:
+            value = format_value(item.value, indent)
+            result += f"{indent}{symbols[item.status]} {item.name}: {value}\n"
+
     result += indent[:-2] + '}'
     return result
 
