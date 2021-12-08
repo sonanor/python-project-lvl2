@@ -29,7 +29,7 @@ def create_diff(before_data: dict, after_data: dict) -> list[Node]:
     :param after_data: second file in dict representation
     :return: inner representation of diff
     """
-    keys = sorted(before_data.keys() | after_data.keys())
+    keys: list[str] = sorted(before_data.keys() | after_data.keys())
     result = []
 
     for key in keys:

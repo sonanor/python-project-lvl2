@@ -8,7 +8,7 @@ SIMPLE_STRING = """{
 }"""
 
 
-RECURSIVE_STILISH_JSON = """{
+RECURSIVE_STILISH = """{
     common: {
       + follow: false
         setting1: Value 1
