@@ -5,4 +5,4 @@
 
 [![Maintainability](https://api.codeclimate.com/v1/badges/1301ae6fd11c6b89cc47/maintainability)](https://codeclimate.com/github/sonanor/python-project-lvl2/maintainability)
 
-[![asciicast](https://asciinema.org/a/fZNGIQEBpHuiQKu1LcMPfySlG.svg)](https://asciinema.org/a/fZNGIQEBpHuiQKu1LcMPfySlG)
+[![asciicast](https://asciinema.org/a/IfAsQWsKL8TQ6j4Ra8YiKCa3k.svg)](https://asciinema.org/a/IfAsQWsKL8TQ6j4Ra8YiKCa3k)

@@ -4,12 +4,18 @@ import os
 import yaml
 
 
-def parser(file):
-    file_format = os.path.splitext(file)[1]
-    result = {}
-    if file_format == '.yaml' or file_format == '.yml':
-        with open(file) as fd:
-            result = yaml.safe_load(fd)
-    elif file_format == '.json':
-        result = json.load(open(file, 'r'))
-    return result
+def read_file(file: str):
+    """Reads file with the help of Parser function which returns dict"""
+    with open(file, 'r') as fd:
+        file_format = os.path.splitext(file)[1]
+        file_content = fd.read()
+    return parser(file_format, file_content)
+
+
+def parser(file_format, file_content) -> dict:
+    mapping = {
+        '.json': json.loads,
+        '.yml': yaml.safe_load,
+        '.yaml': yaml.safe_load
+    }
+    return mapping[file_format](file_content)
