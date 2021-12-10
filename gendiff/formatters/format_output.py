@@ -1,3 +1,4 @@
+from .json_formatter import json_result
 from .plain import plain_result
 from .stylish import stylish_result
 from ..diff_builder import Node
@@ -8,3 +9,7 @@ def create_output_result(diff_data: list[Node], output_format: str) -> str:
         return stylish_result(diff_data)
     elif output_format == 'plain':
         return plain_result(diff_data)
+    elif output_format == 'json':
+        return json_result(diff_data)
+    else:
+        return 'Undefined format'
