@@ -18,8 +18,10 @@ def stylish_result(diff_nodes: list[Node], depth=0):
         elif item.status == ChangeStatus.Changed:
             old_value = format_value(item.old_value, indent)
             new_value = format_value(item.new_value, indent)
-            result += f"{indent}{symbols[ChangeStatus.Removed]} {item.name}: {old_value}\n"
-            result += f"{indent}{symbols[ChangeStatus.Added]} {item.name}: {new_value}\n"
+            result += f"{indent}{symbols[ChangeStatus.Removed]} " \
+                      f"{item.name}: {old_value}\n"
+            result += f"{indent}{symbols[ChangeStatus.Added]} " \
+                      f"{item.name}: {new_value}\n"
         else:
             value = format_value(item.value, indent)
             result += f"{indent}{symbols[item.status]} {item.name}: {value}\n"
