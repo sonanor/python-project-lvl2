@@ -1,4 +1,5 @@
 from gendiff.diff_builder import ChangeStatus, Node
+from gendiff.formatters.helpers import get_value_repr
 
 
 def stylish_result(diff_nodes: list[Node], depth=0):
@@ -28,20 +29,14 @@ def stylish_result(diff_nodes: list[Node], depth=0):
 
 
 def format_value(value, indent):
-    result = ''
-    if value is True:
-        result += 'true'
-    elif value is False:
-        result += 'false'
-    elif value is None:
-        result += 'null'
-    elif type(value) is dict:
+    if isinstance(value, dict):
         indent += '    '
-        result += '{\n'
-        for key in value.keys():
-            data = format_value(value[key], indent)
+        result = '{\n'
+        for key, value in value.items():
+            data = format_value(value, indent)
             result += f"{indent}  {key}: {data}\n"
-        result += indent[:-2] + '}'
+        return result + indent[:-2] + '}'
+    if value_repr := get_value_repr(value):
+        return value_repr
     else:
-        result += str(value)
-    return result
+        return str(value)

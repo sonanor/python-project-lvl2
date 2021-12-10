@@ -39,10 +39,10 @@ def create_diff(before_data: dict, after_data: dict) -> list[Node]:
         if isinstance(elem_before, dict) and isinstance(elem_after, dict):
             node.status = ChangeStatus.Nested
             node.children = create_diff(elem_before, elem_after)
-        elif elem_before is None:
+        elif key not in before_data:
             node.status = ChangeStatus.Added
             node.value = after_data[key]
-        elif elem_after is None:
+        elif key not in after_data:
             node.status = ChangeStatus.Removed
             node.value = before_data[key]
         elif elem_before == elem_after:
