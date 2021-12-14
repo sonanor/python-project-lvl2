@@ -15,7 +15,8 @@ def _plain_result(diff_nodes: list[Node], parent=None) -> str:
         if item.status == ChangeStatus.Nested:
             result += _plain_result(item.children, name)
         else:
-            result += f'Property {format_value(name)} {get_status_output(item)}\n'
+            result += f'Property {format_value(name)} ' \
+                      f'{get_status_output(item)}\n'
     return result
 
 
@@ -25,7 +26,8 @@ def get_status_output(node: Node) -> str:
     if node.status == ChangeStatus.Removed:
         return 'was removed'
     if node.status == ChangeStatus.Changed:
-        return f'was updated. From {format_value(node.old_value)} to {format_value(node.new_value)}'
+        return f'was updated. From {format_value(node.old_value)} ' \
+               f'to {format_value(node.new_value)}'
 
 
 def format_value(value):
