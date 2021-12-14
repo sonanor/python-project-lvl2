@@ -8,4 +8,4 @@ def get_value_repr(value: Any) -> str:
         return 'false'
     elif value is None:
         return 'null'
-    return ''
+    return str(value)

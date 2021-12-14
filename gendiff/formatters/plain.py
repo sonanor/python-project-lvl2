@@ -33,7 +33,6 @@ def get_status_output(node: Node) -> str:
 def format_value(value):
     if isinstance(value, dict):
         return '[complex value]'
-    if value_repr := get_value_repr(value):
-        return value_repr
-    else:
+    if isinstance(value, str):
         return f"'{str(value)}'"
+    return get_value_repr(value)

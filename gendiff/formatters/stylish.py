@@ -38,7 +38,4 @@ def format_value(value, indent):
             data = format_value(value, indent)
             result += f"{indent}  {key}: {data}\n"
         return result + indent[:-2] + '}'
-    if value_repr := get_value_repr(value):
-        return value_repr
-    else:
-        return str(value)
+    return get_value_repr(value)
