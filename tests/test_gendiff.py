@@ -1,9 +1,10 @@
+# flake8: noqa
 import pytest
 
 from gendiff.diff_generator import generate_diff
 from tests.conftest import get_full_filepath
-from tests.expected_result import SIMPLE_STYLISH, RECURSIVE_STYLISH, RECURSIVE_PLAIN, SIMPLE_PLAIN, SIMPLE_JSON, \
-    RECURSIVE_JSON, PLAIN_HEXLET, HEXLET_STYLISH
+from tests.expected_result import SIMPLE_STYLISH, RECURSIVE_STYLISH, RECURSIVE_PLAIN, \
+    SIMPLE_PLAIN, SIMPLE_JSON, RECURSIVE_JSON, PLAIN_HEXLET, HEXLET_STYLISH
 
 
 @pytest.mark.parametrize(
